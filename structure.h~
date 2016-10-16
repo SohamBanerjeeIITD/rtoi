@@ -147,9 +147,7 @@ void getStructureInfo (structure* MyStructure, std::string* RecFunction, int Rec
 	
 	bool IsConditionBlockPortion = 0;
 	bool IsBLockOpen=0;
-	int ConditionBoxIndex=0;
-	int ContentLength=0; 
-	int ElseConditionBox;
+	int elseConditionBox;
 	std::string tempstring;
 	for (int i=1 ; i<RecFunctionLength; i++){
 		tempstring = RecFunction[i];
@@ -158,7 +156,6 @@ void getStructureInfo (structure* MyStructure, std::string* RecFunction, int Rec
 		if(IsBlockOpen==1 &&tempstring.find("}")==string::npos)
 		{
 		
-		ConditionBox
 		//Condition is being stored till a } bracket arrives 
 		//the complete condition we stored now consist of return statement ,values and function names 
 		//these information has to be separated out in other function
@@ -177,8 +174,6 @@ void getStructureInfo (structure* MyStructure, std::string* RecFunction, int Rec
 		if(tempstring.find("if")!=string::npos&& IsBlockOpen==0)
 			{	
 				string condition=getConditionFromIfLine(tempstring); //extract the condition
-				setCondition(&ConditionBox[ConditionBoxIndex],condition);
-
 				if(tempstring.find("{")!=string::npos)
 					{
 					 	IsBlockOpen=1;
@@ -190,7 +185,7 @@ void getStructureInfo (structure* MyStructure, std::string* RecFunction, int Rec
 		if(tempstring.find("if")==string::npos && tempstring.find("else")!=string::npos)
 			{
 				
-			elseConditionBox=ConditionIndex;
+			elseConditionBox=i;
 			}	
 
 
